@@ -1,13 +1,10 @@
 module RequestBody;
 
 export {
-    ## The length of POST bodies to extract.
-    # const length: count = "" &redef;
-
-    ## Hook to include http request body from audit
+    ## Hook to include http request body
     global include: hook(hostname: string, url: string);
     
-    ## Hook to exclude http request body from audit
+    ## Hook to exclude http request body
     global exclude: hook(hostname: string, url: string);
 }
 
@@ -44,7 +41,6 @@ event log_post_bodies(f: fa_file, data: string)
 
 event file_over_new_connection(f: fa_file, c: connection, is_orig: bool)
     {
-
     if ( (! c?$http) || (! c$http?$host) || (! c$http?$method) || (! c$http?$uri) )
         return;
 
